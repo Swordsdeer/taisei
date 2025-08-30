@@ -481,12 +481,6 @@ jobs:
     runs-on: ubuntu-latest
     container: taiseiproject/linux-toolkit:20250616
     steps:
-    - name: Import GPG Key
-      uses: taisei-project/ghaction-import-gpg@v6
-      with:
-        gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
-        passphrase: ${{ secrets.GPG_PASSPHRASE }}
-
     - name: Checkout Code
       uses: actions/checkout@v4
       with:
