@@ -16,13 +16,13 @@
 #include "stage.h"
 #include "util/glm.h"
 
-#define SHOT_BASIC_DAMAGE 60
+#define SHOT_BASIC_DAMAGE 80
 #define SHOT_BASIC_DELAY 6
 
-#define SHOT_HOMING_DAMAGE 120
+#define SHOT_HOMING_DAMAGE 150
 #define SHOT_HOMING_DELAY 6
 
-#define SHOT_SPREAD_DAMAGE 40
+#define SHOT_SPREAD_DAMAGE 60
 #define SHOT_SPREAD_DELAY 12
 
 #define SHOT_ORBS_SPIRIT_DAMAGE 60
