@@ -18,10 +18,10 @@
 #include "util/graphics.h"
 
 #define SHOT_SELF_DELAY 6
-#define SHOT_SELF_DAMAGE 60
+#define SHOT_SELF_DAMAGE 80
 
 #define SHOT_MYON_HALFDELAY 3
-#define SHOT_MYON_DAMAGE 25
+#define SHOT_MYON_DAMAGE 40
 
 typedef struct YoumuAController YoumuAController;
 typedef struct YoumuAMyon YoumuAMyon;
