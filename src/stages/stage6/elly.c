@@ -146,7 +146,7 @@ static void stage6_init_elly_scythe(EllyScythe *scythe, cmplx pos) {
 }
 
 void stage6_despawn_elly_scythe(EllyScythe *scythe) {
-	coevent_signal_once(&scythe->events.despawned);
+	coevent_signal_once(&scythe->events->despawned);
 }
 
 TASK(reset_scythe, { BoxedEllyScythe scythe; }) {

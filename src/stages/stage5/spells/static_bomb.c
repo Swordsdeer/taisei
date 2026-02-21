@@ -62,7 +62,7 @@ TASK(slave_bullet_shot, { BoxedIkuSlave slave; }) {
 TASK(slave_explode, { BoxedIkuSlave slave; }) {
 	IkuSlave *slave = TASK_BIND(ARGS.slave);
 
-	common_charge(120, &slave->pos, 0, &slave->color);
+	common_charge(120, &slave->pos, 0, slave->color);
 
 	RNG_ARRAY(ray_rand, 5);
 	PARTICLE(
@@ -100,7 +100,7 @@ TASK(slave, { cmplx pos; int number; }) {
 		0.03
 	);
 
-	INVOKE_TASK_WHEN(&slave->events.despawned, common_drop_items, &slave->pos, {
+	INVOKE_TASK_WHEN(&slave->events->despawned, common_drop_items, &slave->pos, {
 		.power = 5,
 		.points = 5,
 		.life = (ARGS.number == 1) ? 1 : 0
@@ -124,7 +124,7 @@ TASK(slave, { cmplx pos; int number; }) {
 
 	WAIT(900);
 
-	coevent_signal_once(&slave->events.despawned);
+	coevent_signal_once(&slave->events->despawned);
 }
 
 DEFINE_EXTERN_TASK(stage5_midboss_static_bomb) {

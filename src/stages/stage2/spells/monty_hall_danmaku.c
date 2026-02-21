@@ -52,7 +52,7 @@ TASK(goat, { int slot; CoEvent *activation_event; }) {
 
 	INVOKE_SUBTASK(common_charge,
 		.pos = SLOT_WIDTH * (slot + 0.5) + VIEWPORT_H*I,
-		.color = RGBA(1.0, 0.2, 0.2, 0),
+		.color = *RGBA(1.0, 0.2, 0.2, 0),
 		.time = charge_time,
 		.sound = COMMON_CHARGE_SOUNDS
 	);
@@ -60,7 +60,7 @@ TASK(goat, { int slot; CoEvent *activation_event; }) {
 	if(top_enabled) {
 		INVOKE_SUBTASK(common_charge,
 			.pos = SLOT_WIDTH * (slot + 0.5),
-			.color = RGBA(0.2, 0.2, 1.0, 0),
+			.color = *RGBA(0.2, 0.2, 1.0, 0),
 			.time = charge_time,
 			.sound = COMMON_CHARGE_SOUNDS
 		);
@@ -136,7 +136,7 @@ TASK(cards, { BoxedBoss boss; }) {
 DEFINE_EXTERN_TASK(stage2_spell_monty_hall_danmaku) {
 	Boss *boss = INIT_BOSS_ATTACK(&ARGS);
 
-	COEVENTS_ARRAY(goat_trigger) events;
+	COEVENTS_ARRAY(goat_trigger) *events;
 	TASK_HOST_EVENTS(events);
 
 	boss->move = move_from_towards(boss->pos, VIEWPORT_W/2.0 + VIEWPORT_H/2.0 * I, 0.06);
@@ -179,16 +179,16 @@ DEFINE_EXTERN_TASK(stage2_spell_monty_hall_danmaku) {
 
 		aniplayer_queue(&boss->ani, "guruguru", 1);
 		aniplayer_queue(&boss->ani, "main", 0);
-		INVOKE_SUBTASK(goat, goat1_slot, &events.goat_trigger);
+		INVOKE_SUBTASK(goat, goat1_slot, &events->goat_trigger);
 
 		WAIT(140);
-		INVOKE_SUBTASK(goat, goat2_slot, &events.goat_trigger);
+		INVOKE_SUBTASK(goat, goat2_slot, &events->goat_trigger);
 		boss->move.attraction_point = SLOT_WIDTH * (0.5 + win_slot) + VIEWPORT_H/2.0*I - 200.0*I;
 
 		play_sfx("laser1");
 
 		WAIT(61);
-		coevent_signal(&events.goat_trigger);
+		coevent_signal(&events->goat_trigger);
 
 		INVOKE_SUBTASK(common_drop_items, &boss->pos, {
 			.power = 10,
